@@ -14,10 +14,14 @@ from .rotated_rtmdet_head import RotatedRTMDetHead, RotatedRTMDetSepBNHead
 from .s2a_head import S2AHead, S2ARefineHead
 from .sam_reppoints_head import SAMRepPointsHead
 
+from .rotated_yolox_head import RotatedYOLOXHead
+from .quadri_yolox_head import QuadriYOLOXHead
+
+
 __all__ = [
     'RotatedRetinaHead', 'OrientedRPNHead', 'RotatedRepPointsHead',
     'SAMRepPointsHead', 'AngleBranchRetinaHead', 'RotatedATSSHead',
     'RotatedFCOSHead', 'OrientedRepPointsHead', 'R3Head', 'R3RefineHead',
     'S2AHead', 'S2ARefineHead', 'CFAHead', 'H2RBoxHead', 'H2RBoxV2Head',
-    'RotatedRTMDetHead', 'RotatedRTMDetSepBNHead'
+    'RotatedRTMDetHead', 'RotatedRTMDetSepBNHead', 'QuadriYOLOXHead', 'RotatedYOLOXHead'
 ]

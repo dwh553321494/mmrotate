@@ -39,7 +39,7 @@ class DOTADataset(BaseDataset):
 
     def __init__(self,
                  diff_thr: int = 100,
-                 img_suffix: str = 'png',
+                 img_suffix: str = 'JPG',
                  **kwargs) -> None:
         self.diff_thr = diff_thr
         self.img_suffix = img_suffix
@@ -135,6 +135,29 @@ class DOTADataset(BaseDataset):
 
         instances = self.get_data_info(idx)['instances']
         return [instance['bbox_label'] for instance in instances]
+
+
+
+@DATASETS.register_module()
+class PVDataset(DOTADataset):
+    """PV dataset for detection.
+
+    Note: ``ann_file`` in PVDataset is different from the BaseDataset.
+    In BaseDataset, it is the path of an annotation file. In PVDataset,
+    it is the path of a folder containing XML files.
+    """
+
+    METAINFO = {
+        'classes':
+        ('pv',),
+        # palette is a list of color tuples, which is used for visualization.
+        'palette': [(165, 42, 42), ]
+            # [(165, 42, 42), (189, 183, 107), (0, 255, 0), (255, 0, 0),
+            #         (138, 43, 226), (255, 128, 0), (255, 0, 255),
+            #         (0, 255, 255), (255, 193, 193), (0, 51, 153),
+            #         (255, 250, 205), (0, 139, 139), (255, 255, 0),
+            #         (147, 116, 116), (0, 0, 255)]
+    }
 
 
 @DATASETS.register_module()

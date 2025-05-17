@@ -14,6 +14,10 @@ DeviceType = Union[str, torch.device]
 MaskType = Union[BitmapMasks, PolygonMasks]
 
 
+
+
+
+
 @register_box('qbox')
 class QuadriBoxes(BaseBoxes):
     """The quadrilateral box class.

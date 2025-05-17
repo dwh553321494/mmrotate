@@ -15,13 +15,15 @@ from mmrotate.utils import register_all_modules
 # TODO: support fuse_conv_bn and format_only
 def parse_args():
     parser = argparse.ArgumentParser(description='Test (and eval) a model')
-    parser.add_argument('config', help='test config file path')
-    parser.add_argument('checkpoint', help='checkpoint file')
+    parser.add_argument('--config', default='data/GZBY_X/train_instance10/logs/quadri_yolox_s_iter_5000/quadri_yolox_s_dota.py', help='test config file path')
+    parser.add_argument('--checkpoint', default='data/GZBY_X/train_instance10/logs/quadri_yolox_s_iter_5000/best_dota_mAP_iter_3000.pth',help='checkpoint file')
     parser.add_argument(
         '--work-dir',
+        default='data/GZBY_X/test_instance1200/logs/quadri_yolox_s_iter_5000',
         help='the directory to save the file containing evaluation metrics')
     parser.add_argument(
         '--out',
+        default='data/GZBY_X/test_instance1200/logs/quadri_yolox_s_iter_5000/quadri_yolox_s_dota.pkl',
         type=str,
         help='dump predictions to a pickle file for offline evaluation')
     parser.add_argument(

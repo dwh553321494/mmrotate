@@ -7,5 +7,5 @@ from .transforms import *  # noqa: F401, F403
 
 __all__ = [
     'DOTADataset', 'DOTAv15Dataset', 'DOTAv2Dataset', 'HRSCDataset',
-    'DIORDataset'
+    'DIORDataset', 'PVDataset'
 ]

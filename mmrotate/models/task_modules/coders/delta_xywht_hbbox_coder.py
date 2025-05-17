@@ -108,9 +108,10 @@ class DeltaXYWHTHBBoxCoder(BaseBBoxCoder):
         Returns:
             Union[:obj:`RotatedBoxes`, Tensor]: Decoded boxes.
         """
-        assert pred_bboxes.size(0) == bboxes.size(0)
+        if pred_bboxes.ndim == 2:
+            assert pred_bboxes.size(0) == bboxes.size(0)
         if pred_bboxes.ndim == 3:
-            assert pred_bboxes.size(1) == bboxes.size(1)
+            assert pred_bboxes.size(1) == bboxes.size(0)
         assert bboxes.size(-1) == 4
         assert pred_bboxes.size(-1) == 5
         bboxes = get_box_tensor(bboxes)

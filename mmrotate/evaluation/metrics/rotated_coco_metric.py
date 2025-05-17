@@ -9,7 +9,7 @@ from typing import Dict, Optional, Sequence
 import cv2
 import numpy as np
 import pycocotools.mask as maskUtils
-from mmcv.ops import box_iou_rotated
+from mmcv.ops import box_iou_rotated, box_iou_quadri
 from mmdet.datasets.api_wrappers import COCO
 from mmdet.evaluation import CocoMetric
 from mmengine import MMLogger
@@ -18,7 +18,7 @@ from pycocotools.cocoeval import COCOeval
 from terminaltables import AsciiTable
 
 from mmrotate.registry import METRICS
-from mmrotate.structures.bbox import RotatedBoxes
+from mmrotate.structures.bbox import RotatedBoxes, QuadriBoxes
 
 
 def qbox2rbox_list(boxes: list) -> list:
@@ -60,14 +60,19 @@ class RotatedCocoEval(COCOeval):
             # compute iou between each dt and gt region
             iscrowd = [int(o['iscrowd']) for o in gt]
             ious = maskUtils.iou(d, g, iscrowd)
-        elif p.iouType == 'bbox':
+        elif p.iouType == 'bbox':     
             # Modified for Rotated Box
             g = [g['bbox'] for g in gt]
             d = [d['bbox'] for d in dt]
             # Convert List[List[float]] to Tensor for iou compute
-            g = RotatedBoxes(g).tensor
-            d = RotatedBoxes(d).tensor
-            ious = box_iou_rotated(d, g)
+            if len(d[0]) == 5:
+                g = RotatedBoxes(g).tensor
+                d = RotatedBoxes(d).tensor
+                ious = box_iou_rotated(d, g)
+            elif len(d[0]) == 8:
+                g = QuadriBoxes(g).tensor
+                d = QuadriBoxes(d).tensor
+                ious = box_iou_quadri(d, g)
         else:
             raise Exception('unknown iouType for iou computation')
 

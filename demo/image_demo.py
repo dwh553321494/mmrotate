@@ -10,10 +10,10 @@ from mmrotate.utils import register_all_modules
 
 def parse_args():
     parser = ArgumentParser()
-    parser.add_argument('img', help='Image file')
-    parser.add_argument('config', help='Config file')
-    parser.add_argument('checkpoint', help='Checkpoint file')
-    parser.add_argument('--out-file', default=None, help='Path to output file')
+    parser.add_argument('--img', default='/home/haozi/code/dl/ObjectDetection/mmrotate/data/GZBY_X/test/demo/250.JPG',help='Image file')
+    parser.add_argument('--config', default='/home/haozi/code/dl/ObjectDetection/mmrotate/data/GZBY_X/train_instance10/logs/rotated_yolox_iter_5000/rotated_yolox_rbox_data.py',help='Config file')
+    parser.add_argument('--checkpoint', default='/home/haozi/code/dl/ObjectDetection/mmrotate/data/GZBY_X/train_instance10/logs/rotated_yolox_iter_5000/best_dota_mAP_iter_500.pth',help='Checkpoint file')
+    parser.add_argument('--out-file', default='/home/haozi/code/dl/ObjectDetection/mmrotate/data/GZBY_X/test/yolox/250_rotated_6587658.jpg', help='Path to output file')
     parser.add_argument(
         '--device', default='cuda:0', help='Device used for inference')
     parser.add_argument(
@@ -22,7 +22,7 @@ def parse_args():
         choices=['dota', 'sar', 'hrsc', 'random'],
         help='Color palette used for visualization')
     parser.add_argument(
-        '--score-thr', type=float, default=0.3, help='bbox score threshold')
+        '--score-thr', type=float, default=0., help='bbox score threshold')
     args = parser.parse_args()
     return args
 

@@ -15,8 +15,9 @@ from mmrotate.utils import register_all_modules
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Train a detector')
-    parser.add_argument('config', help='train config file path')
-    parser.add_argument('--work-dir', help='the dir to save logs and models')
+    parser.add_argument('--config', default='configs/rotated_yolox/rotated_yolox_rbox_data.py',help='train config file path')
+    # parser.add_argument('--config', default='configs/rotated_faster_rcnn/rotated-faster-rcnn-le90_r50_fpn_1x_dota.py',help='train config file path')
+    parser.add_argument('--work-dir', default='data/GZBY_X/train_instance10/logs/rotated_yolox_iter_5000', help='the dir to save logs and models')
     parser.add_argument(
         '--amp',
         action='store_true',
